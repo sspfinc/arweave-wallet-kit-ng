@@ -20,6 +20,8 @@ jobs:
           registry-url: https://registry.npmjs.org
         env:
           envFile: .env
+      - name: copy readme
+        run: cp README.md projects/arweave-wallet-kit-ng
       - name: install dependencies
         run: yarn
       - name: build
