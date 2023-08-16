@@ -1,0 +1,48 @@
+.connect {
+  padding: 0.5rem 1.6rem;
+  border: 1px solid #4f46e5;
+  background: #4f46e5;
+  color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0/ 0.8);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+
+  &:hover {
+    background: #4338ca;
+    border: 1px solid #4338ca;
+  }
+
+  &:active {
+    background: #312e81;
+    border: 1px solid #312e81;
+    box-shadow: none;
+  }
+
+  &.xs {
+    padding: 0.3rem 1rem;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+  &.sm {
+    padding: 0.4rem 1.2rem;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+  &.lg {
+    padding: 0.6rem 1.8rem;
+    font-size: 18px;
+    border-radius: 16px;
+  }
+  &.xl {
+    padding: 0.7rem 2.2rem;
+    font-size: 20px;
+    border-radius: 18px;
+  }
+}

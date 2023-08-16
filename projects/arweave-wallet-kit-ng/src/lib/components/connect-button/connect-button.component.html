@@ -1,0 +1,6 @@
+<button (click)="open()" *ngIf="isActive">
+  <ng-content *ngIf="custom !== null"></ng-content>
+  <ng-container *ngIf="custom === null">
+    <div [class]="'connect ' + size">{{ label }}</div>
+  </ng-container>
+</button>

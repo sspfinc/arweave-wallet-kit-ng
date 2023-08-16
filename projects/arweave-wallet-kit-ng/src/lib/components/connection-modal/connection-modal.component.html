@@ -1,0 +1,56 @@
+<div #modal class="modal">
+  <div #modal_backdrop class="modal__backdrop"></div>
+  <div class="modal__content">
+    <section class="modal__header">
+      <h1>Connect Wallet</h1>
+      <button (click)="close()">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M17.25 6.75L6.75 17.25"
+          ></path>
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M6.75 6.75L17.25 17.25"
+          ></path>
+        </svg>
+      </button>
+    </section>
+
+    <ng-container *ngIf="strategies">
+      <section class="modal__strategy" *ngFor="let strategy of strategies">
+        <button
+          class="modal__strategy__logo"
+          [style]="'background-color: rgb(' + strategy.theme + ')'"
+          (click)="connect(strategy)"
+        >
+          <img
+            [src]="'https://arweave.net/' + strategy.logo"
+            draggable="false"
+          />
+        </button>
+        <div class="modal__strategy__content">
+          <h2>{{ strategy.name }}</h2>
+          <p>{{ strategy.description }}</p>
+        </div>
+
+        <button class="modal__go" (click)="connect(strategy)">GO</button>
+      </section>
+    </ng-container>
+
+    <section class="modal__footer">
+      <div class="modal__footer__content">
+        <h3>Don't have a wallet?</h3>
+        <p>Click to learn more about the permaweb & wallets.</p>
+      </div>
+
+      <a href="https://arwiki.wiki/#/en/wallets" class="modal__go">GET</a>
+    </section>
+  </div>
+</div>

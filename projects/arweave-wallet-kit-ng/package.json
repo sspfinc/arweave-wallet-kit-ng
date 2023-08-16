@@ -1,0 +1,29 @@
+{
+  "name": "arweave-wallet-kit-ng",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sspfinc/arweave-wallet-kit-ng.git"
+  },
+  "author": "SSPF Labs, INC.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sspfinc/arweave-wallet-kit-ng/issues"
+  },
+  "homepage": "https://github.com/sspfinc/arweave-wallet-kit-ng#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/common": "^16.1.0",
+    "@angular/core": "^16.1.0",
+    "arconnect": "^0.4.2",
+    "arweave": "^1.14.4",
+    "arweave-wallet-connector": "^1.0.2",
+    "othent": "^1.0.641"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
