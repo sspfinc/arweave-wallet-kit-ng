@@ -1,65 +1,81 @@
-# Arweave-Wallet-Kit-Ng | Capsl8
+# Arweave-Wallet-Kit-Ng
 
-## Introduction
+**_Arweave-Wallet-Kit-Ng_** is a remake of another project **_Arweave Wallet Kit_** designed to work with Angular Apps.
 
-Arweave-Wallet-Kit-Ng is an angular remake of another project `Arweave Wallet Kit` designed to work with Angular Apps.
+## Supported wallets
 
-## Usage
+- [ArConnect](https://arconnect.io)
+- [Arweave.app](https://arweave.app)
+- [Othent](https://othent.io/)
 
-### Import `ArKitNgModule.forRoot()` In `AppModule` ( Creates A Singleton Service )
+## Installation
+
+```sh
+yarn add arweave-wallet-kit-ng
+```
+
+or
+
+```sh
+npm i arweave-wallet-kit-ng
+```
+
+## Setup
+
+Import `ArweaveWalletKitNgModule.forRoot()` In `AppModule` ( Creates A Singleton Service )
 
 ```ts
-import { ArKitNgModule } from "ArKitNg";
+import { ArweaveWalletKitNgModule } from "arweave-wallet-kit-ng";
 @NgModule({
-  // Import ArKitNgModule with forRoot() Into Your AppModule
-  imports: [ArKitNgModule.forRoot()],
+  // Import ArweaveWalletKitNgModule with forRoot() Into Your AppModule
+  imports: [ArweaveWalletKitNgModule.forRoot()],
 })
 export class AppModule {}
 ```
 
 ### Connect Button
 
-![Screen Shot of Button Sizes](https://raw.githubusercontent.com/sspfinc/ArKitNg/main/images/ConnectButtons.png)
+![Screen Shot of Button Sizes](https://wm6hbzyln2g3qupwf7umqo6ge65pnst44x747zrrpfjeriybwjxq.arweave.net/szxw5wtujbhR9i_oyDvGJ7r2ynzl_8_mMXlSSKMBsm8)
 
 ```ts
-// Import AKNConnectButtonModule where ever its needed.
-import { AKNConnectButtonModule } from "ArKitNg";
+// Import AWKConnectButtonModule where ever its needed.
+import { AWKConnectButtonModule } from "arweave-wallet-kit-ng";
 @NgModule({
-  imports: [AKNConnectButtonModule],
+  imports: [AWKConnectButtonModule],
 })
 ```
 
 ```html
 <!-- Default -->
-<akn-connect-button></akn-connect-button>
+<awk-connect-button></awk-connect-button>
 
 <!-- Custom Label -->
-<akn-connect-button [label]="'Connect'"></akn-connect-button>
+<awk-connect-button [label]="'Connect'"></awk-connect-button>
 
 <!-- Size ('xs', 'sm', 'md, 'lg, 'xl') -->
-<akn-connect-button [size]="'xs'"></akn-connect-button>
+<awk-connect-button [size]="'xs'"></awk-connect-button>
 
 <!-- Customize With Your Own HTML/CSS -->
-<akn-connect-button custom>
+<awk-connect-button custom>
   <div class="custom-button" style="color: blue; background: yellow;">My Custom Button</div>
-</akn-connect-button>
+</awk-connect-button>
 ```
 
 ### Connection Modal
 
-![Screen Shot of Button Sizes](https://raw.githubusercontent.com/sspfinc/ArKitNg/main/images/ConnectionModal.png)
+![Screen Shot of Connection Modal](https://au72ufbh6btelgpo4yjuwzf4xma2nkvvgyzb4pjjcdm2y5hom6ba.arweave.net/BT-qFCfwZkWZ7uYTS2S8uwGmqrU2Mh49KRDZrHTuZ4I)
 
 ```ts
-// Import AKNConnectionModalModule where ever its needed.
-import { AKNConnectionModalModule } from "ArKitNg";
+// Import AWKConnectionModalModule where ever its needed.
+import { AWKConnectionModalModule } from "arweave-wallet-kit-ng";
 @NgModule({
-  imports: [AKNConnectionModalModule],
+  imports: [AWKConnectionModalModule],
 })
 ```
 
 ```html
 <!-- THIS IS THE CONNECTION MODAL -->
-<akn-connection-modal
+<awk-connection-modal
   [appInfo]="{ name: '<APP NAME>', logo: '<LOGO URL>' }"
   [permissions]="[
     'ACCESS_ADDRESS',
@@ -72,30 +88,30 @@ import { AKNConnectionModalModule } from "ArKitNg";
     'ACCESS_ARWEAVE_CONFIG',
     'DISPATCH'
   ]"
-></akn-connection-modal>
+></awk-connection-modal>
 ```
 
 ### Profile Modal
 
 ```ts
-// Import AKNProfileModalModule where ever its needed.
-import { AKNProfileModalModule } from "ArKitNg";
+// Import AWKProfileModalModule where ever its needed.
+import { AWKProfileModalModule } from "arweave-wallet-kit-ng";
 @NgModule({
-  imports: [AKNProfileModalModule],
+  imports: [AWKProfileModalModule],
 })
 ```
 
-### Listen For Events
+## Listening For Events
 
 ```ts
-// Import ArKitNgService.
-import { ArKitNgService, EVENT_CODES, formatAddress } from 'ArKitNg';
+// Import ArweaveWalletKitNgService.
+import { ArweaveWalletKitNgService, EVENT_CODES, formatAddress } from 'arweave-wallet-kit-ng';
 
 // Inject It Into Your Component.
-constructor(private arKitNg: ArKitNgService){}
+constructor(private arweaveWalletKitNgService: ArweaveWalletKitNgService){}
 
 // Listening For Events
-this.arKitNg.eventEmitterObservable.subscribe(async (event) => {
+this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(async (event) => {
   switch (event.code) {
 
     case EVENT_CODES.READY:
@@ -111,7 +127,6 @@ this.arKitNg.eventEmitterObservable.subscribe(async (event) => {
       break;
   }
 });
-
 ```
 
 ### Event Codes
@@ -157,6 +172,7 @@ this.arKitNg.eventEmitterObservable.subscribe(async (event) => {
 
 ## Change Log
 
+- `2023-08-17` - Created github workflow to publish package to npm.
 - `2023-08-17` - Modified directory structure for new components.
 - `2023-08-17` - Add Empty Templates for each of the components ( Connect-Button | Connection-Modal | Profile-Modal ).
 - `2023-08-17` - Created Connect Button Component with separate Module Load.
@@ -171,7 +187,7 @@ this.arKitNg.eventEmitterObservable.subscribe(async (event) => {
 
 ## TODO
 
-- [ ] Add Reconnect Popup for ArweaveWebWallet Page Refresh.
+- [ ] Add Reconnect Popup for Arweave Web Wallet Page Refresh.
 - [x] Add "Out of the Box" Connect Button.
 - [ ] Add "Out of the Box" Profile Modal.
 

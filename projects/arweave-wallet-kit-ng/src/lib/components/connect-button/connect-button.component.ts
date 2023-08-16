@@ -5,7 +5,7 @@ import { EVENT_CODES } from '../../types';
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 @Component({
-  selector: 'akn-connect-button',
+  selector: 'awk-connect-button',
   templateUrl: './connect-button.component.html',
   styleUrls: ['./connect-button.component.scss'],
 })

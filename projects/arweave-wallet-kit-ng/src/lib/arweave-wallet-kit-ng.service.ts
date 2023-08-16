@@ -49,7 +49,7 @@ export class ArweaveWalletKitNgService {
   }
 
   /**
-   * Init ArKitNgService And Reconnect If Possible
+   * Init ArweaveWalletKitNgService And Reconnect If Possible
    * @param appInfo
    * @param permissions
    * @param local

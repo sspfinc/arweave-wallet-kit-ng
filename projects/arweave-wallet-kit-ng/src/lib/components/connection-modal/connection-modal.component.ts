@@ -18,7 +18,7 @@ import OthentStrategy from '../../strategy/strategies/Othent';
 import { EVENT_CODES } from '../../types';
 
 @Component({
-  selector: 'akn-connection-modal',
+  selector: 'awk-connection-modal',
   templateUrl: './connection-modal.component.html',
   styleUrls: ['./connection-modal.component.scss'],
 })
