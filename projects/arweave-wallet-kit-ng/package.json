@@ -1,6 +1,6 @@
 {
-  "name": "arweave-wallet-kit-ng",
-  "version": "1.0.1",
+  "name": "arweave-wallet-kit-ng-beta",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sspfinc/arweave-wallet-kit-ng.git"
