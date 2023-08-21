@@ -48,7 +48,6 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
 
   public isActive: boolean = false;
 
-  private goldsky!: ApolloBase<any>;
   private querySubscription!: Subscription;
 
   /**
@@ -132,6 +131,7 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
+    this.querySubscription.unsubscribe();
   }
 
   public open() {

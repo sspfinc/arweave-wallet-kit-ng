@@ -22,6 +22,23 @@ npm i arweave-wallet-kit-ng
 
 ## Setup
 
+Add crypto into your **_tsconfig.app.json_** and **_tsconfig.json_** under **compilerOptions**.
+This allows arweave-js to function to retrieve balance.
+
+```json
+"paths": {
+  "crypto": [
+      "./node_modules/crypto-js"
+    ],
+}
+```
+
+Import the global style sheet in your styles.scss.
+
+```scss
+@import "/node_modules/arweave-wallet-kit-ng/styles.scss";
+```
+
 Import `ArweaveWalletKitNgModule.forRoot()` In `AppModule` ( Creates A Singleton Service )
 
 ```ts
@@ -65,6 +82,8 @@ import { AWKConnectButtonModule } from "arweave-wallet-kit-ng";
 
 ![Screen Shot of Connection Modal](https://au72ufbh6btelgpo4yjuwzf4xma2nkvvgyzb4pjjcdm2y5hom6ba.arweave.net/BT-qFCfwZkWZ7uYTS2S8uwGmqrU2Mh49KRDZrHTuZ4I)
 
+![Screen Shot of Resume Popup](https://d5222nknikgwnzmmb6z62s4bbzbo4cdrg5nhlzbqpmjo5yo2kk7q.arweave.net/H3WtNU1CjWbljA-z7UuBDkLuCHE3WnXkMHsS7uHaUr8)
+
 ```ts
 // Import AWKConnectionModalModule where ever its needed.
 import { AWKConnectionModalModule } from "arweave-wallet-kit-ng";
@@ -93,12 +112,24 @@ import { AWKConnectionModalModule } from "arweave-wallet-kit-ng";
 
 ### Profile Modal
 
+![Screen Shot of Profile Modal](https://zcjdgnthyywkdb75bvyqqbxj6ib55vyl6eafwkgbt5g5vyj5ef5a.arweave.net/yJIzNmfGLKGH_Q1xCAbp8gPe1wvxAFsowZ9N2uE9IXo)
+
+![Screen Shot of Profile Buttons](https://5dpgb5bgd6myxdirjkwxu2v7v337ddmgkouucrjizgjlgs2sguoq.arweave.net/6N5g9CYfmYuNEUqtemq_rvfxjYZTqUFFKMmSs0tSNR0)
+
 ```ts
 // Import AWKProfileModalModule where ever its needed.
 import { AWKProfileModalModule } from "arweave-wallet-kit-ng";
 @NgModule({
   imports: [AWKProfileModalModule],
 })
+```
+
+```html
+<!-- Default -->
+<awk-profile-modal></awk-profile-modal>
+
+<!-- Size ('xs', 'sm', 'md, 'lg, 'xl') -->
+<awk-profile-modal [size]="'xs'"></awk-profile-modal>
 ```
 
 ## Listening For Events
@@ -170,8 +201,19 @@ this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(async (event) =>
   DISPATCH_ERROR = 5015,
 ```
 
+## Custom Styling
+
+If you don't want to use the default styling you can copy the styles.scss from /projects/arweave-wallet-kit-ng/styles.scss and bring it to your main applications assets directory and skip the step above telling your to import the style sheet.
+
 ## Change Log
 
+- `2023-08-21` - Updated connection-button component.
+- `2023-08-21` - Updated connection-modal component.
+- `2023-08-21` - Added Profile Modal and Profile Button.
+- `2023-08-21` - Refactored ArweaveWebWallet.ts and Added specify disconnect functionality.
+- `2023-08-21` - Add balance function to retrieve balance using arweavejs.
+- `2023-08-21` - Removed component relative scss files.
+- `2023-08-21` - Refactored styles into /styles directory that build into styles.scss.
 - `2023-08-17` - Created github workflow to publish package to npm.
 - `2023-08-17` - Modified directory structure for new components.
 - `2023-08-17` - Add Empty Templates for each of the components ( Connect-Button | Connection-Modal | Profile-Modal ).
@@ -187,9 +229,10 @@ this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(async (event) =>
 
 ## TODO
 
-- [ ] Add Reconnect Popup for Arweave Web Wallet Page Refresh.
+- [x] Add Reconnect Popup for Arweave Web Wallet Page Refresh.
 - [x] Add "Out of the Box" Connect Button.
-- [ ] Add "Out of the Box" Profile Modal.
+- [x] Add "Out of the Box" Profile Modal.
+- [x] Get Handle and Avatar from ArProfile.
 
 ## References
 
