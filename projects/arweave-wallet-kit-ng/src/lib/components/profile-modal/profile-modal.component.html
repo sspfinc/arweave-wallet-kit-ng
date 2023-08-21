@@ -1,1 +1,133 @@
-<p>profile-modal works!</p>
+<button (click)="open()">
+  <ng-container>
+    <div [class]="'awk-profile ' + size">
+      <span class="awk-profile__balance"
+        >{{ balance | number : "1.0-2" }} AR</span
+      >
+      <img class="awk-avatar" *ngIf="avatar" [src]="avatar" />
+      <span class="awk-avatar default" *ngIf="!avatar"
+        ><svg
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="mocked-styled-7 as6ir6f"
+        >
+          <circle
+            cx="12"
+            cy="8"
+            r="3.25"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          ></circle>
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M6.8475 19.25H17.1525C18.2944 19.25 19.174 18.2681 18.6408 17.2584C17.8563 15.7731 16.068 14 12 14C7.93201 14 6.14367 15.7731 5.35924 17.2584C4.82597 18.2681 5.70558 19.25 6.8475 19.25Z"
+          ></path>
+        </svg>
+      </span>
+      <span>{{ handle || display_address }}</span>
+    </div>
+  </ng-container>
+</button>
+
+<div #profile class="awk-modal">
+  <div #profile_backdrop class="awk-modal__backdrop"></div>
+  <div class="awk-modal__content">
+    <section class="awk-modal__header">
+      <h1>Profile</h1>
+      <button class="awk-btn awk-btn--cancel" (click)="close()">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M17.25 6.75L6.75 17.25"
+          ></path>
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M6.75 6.75L17.25 17.25"
+          ></path>
+        </svg>
+      </button>
+    </section>
+
+    <section class="awk-modal__body">
+      <img class="awk-avatar" *ngIf="avatar" [src]="avatar" />
+      <span class="awk-avatar default" *ngIf="!avatar"
+        ><svg
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="mocked-styled-7 as6ir6f"
+        >
+          <circle
+            cx="12"
+            cy="8"
+            r="3.25"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          ></circle>
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M6.8475 19.25H17.1525C18.2944 19.25 19.174 18.2681 18.6408 17.2584C17.8563 15.7731 16.068 14 12 14C7.93201 14 6.14367 15.7731 5.35924 17.2584C4.82597 18.2681 5.70558 19.25 6.8475 19.25Z"
+          ></path>
+        </svg>
+      </span>
+      <div class="awk-address">
+        {{ handle || long_address }}
+        <svg
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+          (click)="copyToClipboard(address!)"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M6.5 15.25V15.25C5.5335 15.25 4.75 14.4665 4.75 13.5V6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H13.5C14.4665 4.75 15.25 5.5335 15.25 6.5V6.5"
+          ></path>
+          <rect
+            width="10.5"
+            height="10.5"
+            x="8.75"
+            y="8.75"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            rx="2"
+          ></rect>
+        </svg>
+      </div>
+      <div class="awk-balance">{{ balance }} AR</div>
+    </section>
+
+    <section class="awk-modal__footer awk-modal__footer--noborder">
+      <button
+        class="awk-btn awk-btn--tertiary awk-btn--xl"
+        (click)="disconnect()"
+      >
+        Disconnect
+      </button>
+    </section>
+  </div>
+</div>
