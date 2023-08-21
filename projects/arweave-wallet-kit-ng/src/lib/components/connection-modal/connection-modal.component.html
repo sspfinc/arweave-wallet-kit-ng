@@ -1,9 +1,9 @@
-<div #modal class="modal">
-  <div #modal_backdrop class="modal__backdrop"></div>
-  <div class="modal__content">
-    <section class="modal__header">
+<div #modal class="awk-modal">
+  <div #modal_backdrop class="awk-modal__backdrop"></div>
+  <div class="awk-modal__content">
+    <section class="awk-modal__header">
       <h1>Connect Wallet</h1>
-      <button (click)="close()">
+      <button class="awk-btn" (click)="close()">
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path
             stroke="currentColor"
@@ -23,34 +23,63 @@
       </button>
     </section>
 
-    <ng-container *ngIf="strategies">
-      <section class="modal__strategy" *ngFor="let strategy of strategies">
-        <button
-          class="modal__strategy__logo"
-          [style]="'background-color: rgb(' + strategy.theme + ')'"
-          (click)="connect(strategy)"
-        >
-          <img
-            [src]="'https://arweave.net/' + strategy.logo"
-            draggable="false"
-          />
-        </button>
-        <div class="modal__strategy__content">
-          <h2>{{ strategy.name }}</h2>
-          <p>{{ strategy.description }}</p>
+    <section class="awk-modal__body">
+      <ng-container *ngIf="strategies">
+        <div class="awk-modal__strategy" *ngFor="let strategy of strategies">
+          <button
+            class="awk-modal__strategy__logo"
+            [style]="'background-color: rgb(' + strategy.theme + ')'"
+            (click)="connect(strategy)"
+          >
+            <img
+              [src]="'https://arweave.net/' + strategy.logo"
+              draggable="false"
+            />
+          </button>
+          <div class="awk-modal__strategy__content">
+            <h2>{{ strategy.name }}</h2>
+            <p>{{ strategy.description }}</p>
+          </div>
+          <button
+            class="awk-btn awk-btn--secondary awk-btn--xs"
+            (click)="connect(strategy)"
+          >
+            GO
+          </button>
         </div>
+      </ng-container>
+    </section>
 
-        <button class="modal__go" (click)="connect(strategy)">GO</button>
-      </section>
-    </ng-container>
-
-    <section class="modal__footer">
-      <div class="modal__footer__content">
+    <section class="awk-modal__footer">
+      <div class="awk-modal__footer__content">
         <h3>Don't have a wallet?</h3>
         <p>Click to learn more about the permaweb & wallets.</p>
       </div>
 
-      <a href="https://arwiki.wiki/#/en/wallets" class="modal__go">GET</a>
+      <a
+        href="https://arwiki.wiki/#/en/wallets"
+        class="awk-btn awk-btn--primary awk-btn--sm"
+        >Get Wallet</a
+      >
     </section>
+  </div>
+</div>
+
+<div #resume_popup class="awk-resume">
+  <div #resume_backdrop class="awk-resume__backdrop"></div>
+  <div class="awk-resume__content">
+    <p>Would you like to restore your Arweave.app session?</p>
+
+    <div class="awk-resume__content__buttons">
+      <button class="awk-btn awk-btn--primary awk-btn--sm" (click)="resume()">
+        RESUME
+      </button>
+      <button
+        class="awk-btn awk-btn--secondary awk-btn--sm"
+        (click)="disconnect()"
+      >
+        Cancel
+      </button>
+    </div>
   </div>
 </div>

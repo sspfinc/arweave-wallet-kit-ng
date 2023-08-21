@@ -20,7 +20,6 @@ import { EVENT_CODES } from '../../types';
 @Component({
   selector: 'awk-connection-modal',
   templateUrl: './connection-modal.component.html',
-  styleUrls: ['./connection-modal.component.scss'],
 })
 export class ConnectionModalComponent implements AfterViewInit, OnDestroy {
   /**
@@ -43,7 +42,10 @@ export class ConnectionModalComponent implements AfterViewInit, OnDestroy {
    * View Children For ArKitNgComponent (Modal, Modal Backdrop)
    */
   @ViewChild('modal', { static: true }) modal!: ElementRef;
-  @ViewChild('modal_backdrop', { static: false }) modal_backdrop!: ElementRef;
+  @ViewChild('modal_backdrop', { static: true }) modal_backdrop!: ElementRef;
+
+  @ViewChild('resume_popup', { static: true }) resume_popup!: ElementRef;
+  @ViewChild('resume_backdrop', { static: true }) resume_backdrop!: ElementRef;
 
   /**
    * Event Subscription For ArKitNgComponent (Event Emitter)
@@ -76,6 +78,23 @@ export class ConnectionModalComponent implements AfterViewInit, OnDestroy {
       this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(
         async (event) => {
           switch (event.code) {
+            case EVENT_CODES.RESUME:
+              this.renderer.removeClass(
+                this.resume_popup.nativeElement,
+                'opened'
+              );
+
+              await this.arweaveWalletKitNgService.getActiveAddress();
+
+              break;
+            case EVENT_CODES.READY:
+            case EVENT_CODES.CONNECT:
+              this.arweaveWalletKitNgService.setIsActive(false);
+
+              await this.arweaveWalletKitNgService.getActiveAddress();
+
+              break;
+
             case EVENT_CODES.MODAL:
               if (event.data === true) {
                 this.renderer.addClass(this.modal.nativeElement, 'opened');
@@ -83,14 +102,23 @@ export class ConnectionModalComponent implements AfterViewInit, OnDestroy {
                 this.renderer.removeClass(this.modal.nativeElement, 'opened');
               }
               break;
-            case EVENT_CODES.READY:
-              await this.connect(event.data);
-              break;
+
             case EVENT_CODES.CAN_RESUME:
-              // TODO: Bring up a modal asking the user if they want to resume
+              setTimeout(() => {
+                this.renderer.addClass(
+                  this.resume_popup.nativeElement,
+                  'opened'
+                );
+              }, 1);
+              break;
+
+            case EVENT_CODES.DISCONNECT:
+              this.renderer.removeClass(
+                this.resume_popup.nativeElement,
+                'opened'
+              );
               break;
           }
-          console.log(event);
         }
       );
 
@@ -139,5 +167,13 @@ export class ConnectionModalComponent implements AfterViewInit, OnDestroy {
    */
   public async disconnect(): Promise<void> {
     await this.arweaveWalletKitNgService.disconnect();
+  }
+
+  /**
+   * Reconnect To Wallet
+   * @returns Promise<void>
+   */
+  public async resume(): Promise<void> {
+    await this.arweaveWalletKitNgService.resume();
   }
 }
