@@ -1,11 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "paths": {
-      "arweave-wallet-kit-ng": [
-        "dist/arweave-wallet-kit-ng"
-      ]
-    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

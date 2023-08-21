@@ -1,6 +1,6 @@
 .awk-btn {
   outline: none;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   flex: 0 0 auto;
@@ -12,6 +12,7 @@
 
   transition: all 0.1s ease-in-out;
   border: 1px solid transparent;
+  text-decoration: none;
   background-color: #fff;
   color: #000;
   cursor: pointer;
@@ -45,6 +46,13 @@
     padding: 0rem 2.2rem;
     font-size: 20px;
     border-radius: 18px;
+  }
+
+  &.awk-btn--close {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 100%;
   }
 
   &.awk-btn--primary {

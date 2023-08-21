@@ -2,8 +2,8 @@
   <div #modal_backdrop class="awk-modal__backdrop"></div>
   <div class="awk-modal__content">
     <section class="awk-modal__header">
-      <h1>Connect Wallet</h1>
-      <button class="awk-btn" (click)="close()">
+      <div class="awk-fs--1 awk-fw--bold">Connect Wallet</div>
+      <div class="awk-btn awk-btn--close" (click)="close()">
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path
             stroke="currentColor"
@@ -20,13 +20,13 @@
             d="M6.75 6.75L17.25 17.25"
           ></path>
         </svg>
-      </button>
+      </div>
     </section>
 
     <section class="awk-modal__body">
       <ng-container *ngIf="strategies">
         <div class="awk-modal__strategy" *ngFor="let strategy of strategies">
-          <button
+          <div
             class="awk-modal__strategy__logo"
             [style]="'background-color: rgb(' + strategy.theme + ')'"
             (click)="connect(strategy)"
@@ -35,25 +35,31 @@
               [src]="'https://arweave.net/' + strategy.logo"
               draggable="false"
             />
-          </button>
-          <div class="awk-modal__strategy__content">
-            <h2>{{ strategy.name }}</h2>
-            <p>{{ strategy.description }}</p>
           </div>
-          <button
+          <div class="awk-modal__strategy__content">
+            <div class="awk-fs--2 awk-fw--bold">
+              {{ strategy.name }}
+            </div>
+            <div class="awk-fs--4 awk-fw--bold awk-muted">
+              {{ strategy.description }}
+            </div>
+          </div>
+          <div
             class="awk-btn awk-btn--secondary awk-btn--xs"
             (click)="connect(strategy)"
           >
             GO
-          </button>
+          </div>
         </div>
       </ng-container>
     </section>
 
     <section class="awk-modal__footer">
       <div class="awk-modal__footer__content">
-        <h3>Don't have a wallet?</h3>
-        <p>Click to learn more about the permaweb & wallets.</p>
+        <div class="awk-fs--2 awk-fw--bold">Don't have a wallet?</div>
+        <div class="awk-fs--4 awk-fw--bold awk-muted">
+          Click to learn more about the permaweb & wallets.
+        </div>
       </div>
 
       <a
@@ -68,18 +74,20 @@
 <div #resume_popup class="awk-resume">
   <div #resume_backdrop class="awk-resume__backdrop"></div>
   <div class="awk-resume__content">
-    <p>Would you like to restore your Arweave.app session?</p>
+    <div class="awk-fs--2">
+      Would you like to restore your Arweave.app session?
+    </div>
 
     <div class="awk-resume__content__buttons">
-      <button class="awk-btn awk-btn--primary awk-btn--sm" (click)="resume()">
-        RESUME
-      </button>
-      <button
+      <div class="awk-btn awk-btn--primary awk-btn--sm" (click)="resume()">
+        Resume
+      </div>
+      <div
         class="awk-btn awk-btn--secondary awk-btn--sm"
         (click)="disconnect()"
       >
         Cancel
-      </button>
+      </div>
     </div>
   </div>
 </div>

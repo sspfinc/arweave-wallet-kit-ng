@@ -1,4 +1,4 @@
-<button (click)="open()">
+<div (click)="open()">
   <ng-container>
     <div [class]="'awk-profile ' + size">
       <span class="awk-profile__balance"
@@ -34,14 +34,15 @@
       <span>{{ handle || display_address }}</span>
     </div>
   </ng-container>
-</button>
+</div>
 
 <div #profile class="awk-modal">
   <div #profile_backdrop class="awk-modal__backdrop"></div>
   <div class="awk-modal__content">
     <section class="awk-modal__header">
-      <h1>Profile</h1>
-      <button class="awk-btn awk-btn--cancel" (click)="close()">
+      <div class="awk-fs--1 awk-fw--bold">Profile</div>
+
+      <div class="awk-btn awk-btn--close" (click)="close()">
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path
             stroke="currentColor"
@@ -58,7 +59,7 @@
             d="M6.75 6.75L17.25 17.25"
           ></path>
         </svg>
-      </button>
+      </div>
     </section>
 
     <section class="awk-modal__body">
@@ -89,7 +90,7 @@
           ></path>
         </svg>
       </span>
-      <div class="awk-address">
+      <div class="awk-address awk-fs--1 awk-fw--bold">
         {{ handle || long_address }}
         <svg
           width="24"
@@ -118,16 +119,13 @@
           ></rect>
         </svg>
       </div>
-      <div class="awk-balance">{{ balance }} AR</div>
+      <div class="awk-fs--3 awk-fw--bold awk-muted">{{ balance }} AR</div>
     </section>
 
     <section class="awk-modal__footer awk-modal__footer--noborder">
-      <button
-        class="awk-btn awk-btn--tertiary awk-btn--xl"
-        (click)="disconnect()"
-      >
+      <div class="awk-btn awk-btn--tertiary awk-btn--xl" (click)="disconnect()">
         Disconnect
-      </button>
+      </div>
     </section>
   </div>
 </div>

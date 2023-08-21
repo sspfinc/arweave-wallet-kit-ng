@@ -23,21 +23,6 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border-radius: 100%;
-  }
-  h1 {
-    padding: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-    text-align: center;
-  }
 }
 
 .awk-modal__content {
@@ -52,7 +37,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(-110%);
   width: 100%;
-  max-width: 480px;
+  max-width: 320px;
   margin: auto;
   padding: 1.5rem;
   transition: all 0.4s ease-in-out;
@@ -79,7 +64,7 @@
   padding-top: 0.8rem;
 
   &:not(.awk-modal__footer--noborder) {
-    border-top: 1px solid rgb(24, 24, 24);
+    border-top: 1px solid #ccc;
   }
 
   .awk-btn {
@@ -118,12 +103,59 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 100%;
-  h2 {
-    font-size: 1.05rem;
-    font-weight: 600;
-  }
-  p {
-    font-size: 0.7rem;
-    color: rgb(146, 146, 147);
+}
+
+.awk-fs--1 {
+  font-size: 1.2rem;
+}
+
+.awk-fs--2 {
+  font-size: 1.05rem;
+}
+
+.awk-fs--3 {
+  font-size: 0.9rem;
+}
+
+.awk-fs--4 {
+  font-size: 0.7rem;
+}
+
+.awk-fw--normal {
+  font-weight: 400;
+}
+
+.awk-fw--bold {
+  font-weight: 600;
+}
+
+.awk-muted {
+  color: #999;
+}
+
+.awk-address {
+  display: flex;
+  align-items: center;
+
+  gap: 0.25rem;
+  margin-top: 0.7rem;
+
+  svg {
+    cursor: pointer;
+
+    width: 1em;
+    height: 1em;
+    font-size: 0.85em;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-transition: all 0.125s ease-in-out;
+    transition: all 0.125s ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      transform: scale(0.9);
+    }
   }
 }

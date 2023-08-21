@@ -20,17 +20,31 @@ or
 npm i arweave-wallet-kit-ng
 ```
 
+## Peer Dependencies
+
+```sh
+# arconnect | arweave | arweave-wallet-connector | othent
+yarn add arconnect@^0.4.2 arweave@^1.14.4 arweave-wallet-connector@^1.0.2 othent@^1.0.641
+
+# @apollo/client | apollo-angular | graphql
+yarn add @apollo/client@^3.0.0 apollo-angular@^5.0.0 graphql@^16.6.0
+```
+
 ## Setup
 
-Add crypto into your **_tsconfig.app.json_** and **_tsconfig.json_** under **compilerOptions**.
-This allows arweave-js to function to retrieve balance.
+Add the following into your **tsconfig.json** under **compilerOptions**.
+This allows arweave-js to function.
 
 ```json
+"allowSyntheticDefaultImports": true,
 "paths": {
   "crypto": [
-      "./node_modules/crypto-js"
-    ],
-}
+    "./node_modules/crypto-js"
+  ],
+  "@angular/*": [
+    "./node_modules/@angular/*"
+  ]
+},
 ```
 
 Import the global style sheet in your styles.scss.

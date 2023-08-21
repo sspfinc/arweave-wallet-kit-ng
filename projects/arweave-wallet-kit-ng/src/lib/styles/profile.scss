@@ -2,7 +2,7 @@
   font-family: Arial, sans-serif;
 
   box-shadow: 0 1px 3px rgb(0 0 0/ 1);
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
@@ -55,39 +55,4 @@
     border-radius: 18px;
     font-size: 20px;
   }
-}
-
-.awk-address {
-  display: flex;
-  align-items: center;
-  font-size: 22px;
-  font-weight: bold;
-  gap: 0.25rem;
-  margin-top: 0.25rem;
-
-  svg {
-    cursor: pointer;
-
-    width: 1em;
-    height: 1em;
-    font-size: 18px;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-transition: all 0.125s ease-in-out;
-    transition: all 0.125s ease-in-out;
-    &:hover {
-      opacity: 0.5;
-    }
-    &:active {
-      -webkit-transform: scale(0.9);
-      -ms-transform: scale(0.9);
-      transform: scale(0.9);
-    }
-  }
-}
-
-.awk-balance {
-  display: flex;
-  font-size: 16px;
-  font-weight: bold;
-  color: #999;
 }
