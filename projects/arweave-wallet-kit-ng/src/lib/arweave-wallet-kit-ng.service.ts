@@ -13,18 +13,21 @@ import { BehaviorSubject } from 'rxjs';
 import Strategy from './strategy/Strategy';
 import { AKN_EVENT, EVENT_CODES } from './types';
 
+import Arweave from 'arweave/node';
+
 // declare const Arweave: any;
 
 @Injectable()
 export class ArweaveWalletKitNgService {
+  private arweave!: Arweave;
   private isActive: boolean = false;
 
   private strategies!: Strategy[];
-  private strategy!: Strategy | undefined;
+  public strategy!: Strategy | undefined;
   private strategyType: string | undefined;
 
   private permissions!: PermissionType[];
-  private gatewayConfig!: GatewayConfig;
+  public gatewayConfig!: GatewayConfig;
   private appInfo!: AppInfo;
 
   /**
@@ -88,6 +91,8 @@ export class ArweaveWalletKitNgService {
       };
     }
 
+    this.arweave = new Arweave(this.gatewayConfig);
+
     this.strategyType = localStorage.getItem('strategy') || undefined;
 
     this.strategy = this.strategies.find(
@@ -144,6 +149,7 @@ export class ArweaveWalletKitNgService {
     if (!this.strategy) {
       return;
     }
+    console.log(await this.strategy.isAvailable());
     try {
       await this.strategy.disconnect();
       this.emit('Disconnected', EVENT_CODES.DISCONNECT);
@@ -164,7 +170,7 @@ export class ArweaveWalletKitNgService {
       return null;
     }
     try {
-      const result = this.strategy.resumeSession();
+      const result = await this.strategy.resumeSession();
       this.emit('Session Resumed', EVENT_CODES.RESUME, result);
       return result;
     } catch (e) {
@@ -472,5 +478,22 @@ export class ArweaveWalletKitNgService {
       message,
       data,
     });
+  }
+
+  public async getBalance(address: string): Promise<number | null> {
+    if (!this.arweave) {
+      return null;
+    }
+    try {
+      const result = this.arweave.ar.winstonToAr(
+        await this.arweave.wallets.getBalance(address)
+      );
+      const balance = Number(result);
+      this.emit('Balance', EVENT_CODES.BALANCE, balance);
+      return balance;
+    } catch (e) {
+      this.emitError('Could Not Get Balance', EVENT_CODES.BALANCE_ERROR, e);
+      return null;
+    }
   }
 }

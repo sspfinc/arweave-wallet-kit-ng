@@ -6,6 +6,11 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
+    "paths": {
+      "crypto": [
+        "../node_modules/crypto-js"
+      ]
+    }
   },
   "exclude": [
     "**/*.spec.ts"
