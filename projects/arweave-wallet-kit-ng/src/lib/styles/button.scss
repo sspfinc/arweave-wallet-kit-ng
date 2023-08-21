@@ -1,0 +1,99 @@
+.awk-btn {
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  position: relative;
+  height: 38px;
+  padding: 0rem 1.6rem;
+
+  font-family: Arial, sans-serif;
+
+  transition: all 0.1s ease-in-out;
+  border: 1px solid transparent;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  border-radius: 14px;
+
+  font-size: 16px;
+  font-weight: 600;
+  &.awk-btn--xs {
+    height: 32px;
+    padding: 0rem 1rem;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+  &.awk-btn--sm {
+    height: 35px;
+    padding: 0rem 1.2rem;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+  &.awk-btn--lg {
+    height: 42px;
+    padding: 0rem 1.8rem;
+    border-radius: 16px;
+
+    font-size: 18px;
+  }
+  &.awk-btn--xl {
+    height: 45px;
+    padding: 0rem 2.2rem;
+    font-size: 20px;
+    border-radius: 18px;
+  }
+
+  &.awk-btn--primary {
+    box-shadow: 0 1px 3px rgb(0 0 0/ 1);
+
+    background-color: #4f46e5;
+    color: #fff;
+  }
+
+  &.awk-btn--secondary {
+    box-shadow: 0 1px 3px rgb(0 0 0/ 1);
+
+    background-color: #333;
+    color: #fff;
+  }
+
+  &.awk-btn--tertiary {
+    box-shadow: 0 1px 3px rgb(0 0 0/ 1);
+
+    background-color: #dc2626;
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: #ccc;
+
+    &.awk-btn--primary {
+      background-color: #4338ca;
+    }
+    &.awk-btn--secondary {
+      background-color: #222;
+    }
+    &.awk-btn--tertiary {
+      background-color: #b91c1c;
+    }
+  }
+
+  &:active {
+    box-shadow: none;
+    background-color: #aaa;
+
+    &.awk-btn--primary {
+      background-color: #312e81;
+    }
+    &.awk-btn--secondary {
+      background-color: #000;
+    }
+    &.awk-btn--tertiary {
+      background-color: #7f1d1d;
+    }
+  }
+}

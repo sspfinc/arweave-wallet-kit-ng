@@ -1,0 +1,93 @@
+.awk-profile {
+  font-family: Arial, sans-serif;
+
+  box-shadow: 0 1px 3px rgb(0 0 0/ 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  height: 38px;
+  padding: 0 1.6rem;
+  transition: all 0.1s ease-in-out;
+  background: #4f46e5;
+  border: 1px solid #4f46e5;
+  border-radius: 14px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+  color: #fff;
+  .awk-avatar {
+    height: 75%;
+  }
+
+  &:hover {
+    background: #4338ca;
+    border: 1px solid #4338ca;
+  }
+
+  &:active {
+    box-shadow: none;
+    background: #312e81;
+    border: 1px solid #312e81;
+  }
+
+  &.xs {
+    height: 32px;
+    padding: 0rem 1rem;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+  &.sm {
+    height: 35px;
+    padding: 0rem 1.2rem;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+  &.lg {
+    height: 42px;
+    padding: 0rem 1.8rem;
+    border-radius: 16px;
+    font-size: 18px;
+  }
+  &.xl {
+    height: 45px;
+    padding: 0rem 2.2rem;
+    border-radius: 18px;
+    font-size: 20px;
+  }
+}
+
+.awk-address {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+
+  svg {
+    cursor: pointer;
+
+    width: 1em;
+    height: 1em;
+    font-size: 18px;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-transition: all 0.125s ease-in-out;
+    transition: all 0.125s ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+  }
+}
+
+.awk-balance {
+  display: flex;
+  font-size: 16px;
+  font-weight: bold;
+  color: #999;
+}

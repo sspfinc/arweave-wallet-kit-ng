@@ -1,0 +1,129 @@
+.awk-modal {
+  font-family: Arial, sans-serif;
+
+  &.opened {
+    .awk-modal__backdrop {
+      display: block;
+    }
+    .awk-modal__content {
+      transform: translateX(-50%) translateY(0%);
+    }
+  }
+}
+
+.awk-modal__backdrop {
+  inset: 0;
+  display: none;
+  position: fixed;
+  background: rgb(0 0 0 / 0.5);
+}
+
+.awk-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 100%;
+  }
+  h1 {
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.awk-modal__content {
+  box-shadow: 0 1px 6px rgb(0 0 0/ 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  gap: 1rem;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-110%);
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  padding: 1.5rem;
+  transition: all 0.4s ease-in-out;
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.awk-modal__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  // gap: 1rem;
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+.awk-modal__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding-top: 0.8rem;
+
+  &:not(.awk-modal__footer--noborder) {
+    border-top: 1px solid rgb(24, 24, 24);
+  }
+
+  .awk-btn {
+    flex: 1 0 auto;
+  }
+}
+
+.awk-modal__strategy {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  &:not(:first-child) {
+    margin-top: 0.8rem;
+  }
+  .awk-modal__strategy__logo {
+    flex: 0 0 auto;
+    position: relative;
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 1rem;
+    img {
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60%;
+      height: 60%;
+    }
+  }
+}
+
+.awk-modal__footer__content,
+.awk-modal__strategy__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  p {
+    font-size: 0.7rem;
+    color: rgb(146, 146, 147);
+  }
+}

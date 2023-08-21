@@ -1,0 +1,23 @@
+.awk-avatar {
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 96px;
+  background-size: cover;
+  border-radius: 100%;
+  color: #fff;
+  &.default {
+    background: linear-gradient(
+      135deg,
+      #dc2626 25%,
+      #b91c1c 45%,
+      #b91c1c 80%,
+      #7f1d1d 100%
+    );
+  }
+  svg {
+    width: 75%;
+    height: 75%;
+  }
+}

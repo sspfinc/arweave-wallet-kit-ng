@@ -3,10 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "build": "yarn scss && ng build",
+    "scss": "scss-bundle --includePaths ['./projects/arweave-wallet-kit-ng/src/lib/styles'] -e ./projects/arweave-wallet-kit-ng/src/lib/styles/styles.scss -o ./projects/arweave-wallet-kit-ng/styles.scss"
   },
   "private": true,
   "dependencies": {
@@ -18,9 +16,12 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@apollo/client": "^3.0.0",
+    "apollo-angular": "^5.0.0",
     "arconnect": "^0.4.2",
     "arweave": "^1.14.4",
     "arweave-wallet-connector": "^1.0.2",
+    "graphql": "^16.6.0",
     "othent": "^1.0.641",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -38,6 +39,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^16.0.0",
+    "scss-bundle": "^3.1.2",
     "typescript": "~5.1.3"
   }
 }
