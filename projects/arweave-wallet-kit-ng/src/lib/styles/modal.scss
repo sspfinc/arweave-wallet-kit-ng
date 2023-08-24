@@ -1,6 +1,4 @@
 .awk-modal {
-  font-family: Arial, sans-serif;
-
   &.opened {
     .awk-modal__backdrop {
       display: block;
@@ -37,7 +35,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(-110%);
   width: 100%;
-  max-width: 320px;
+  max-width: 24rem;
   margin: auto;
   padding: 1.5rem;
   transition: all 0.4s ease-in-out;
@@ -103,6 +101,8 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 100%;
+  // Experimental
+  text-wrap: balance;
 }
 
 .awk-fs--1 {
