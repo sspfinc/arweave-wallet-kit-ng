@@ -127,17 +127,22 @@ export class ArweaveWalletKitNgService {
    * @param type - WalletType
    */
   public async connect(strategy: Strategy) {
+    this.emit('Try Connect', EVENT_CODES.TRY_CONNECT);
     this.strategy = strategy;
-    localStorage.setItem('strategy', this.strategy.id);
     try {
       await strategy.connect(
         this.permissions,
         this.appInfo,
         this.gatewayConfig
       );
+      localStorage.setItem('strategy', this.strategy.id);
+
       this.emit('Connected', EVENT_CODES.CONNECT);
     } catch (e) {
       console.log(e);
+      this.strategy = undefined;
+      localStorage.removeItem('strategy');
+
       this.emitError('Could Not Connect', EVENT_CODES.CONNECT_ERROR, e);
     }
   }
@@ -146,6 +151,8 @@ export class ArweaveWalletKitNgService {
    * Disconnect From Wallet and Emit Change
    */
   public async disconnect() {
+    this.emit('Try Disconnect', EVENT_CODES.TRY_DISCONNECT);
+    localStorage.removeItem('strategy');
     if (!this.strategy) {
       return;
     }
@@ -156,7 +163,6 @@ export class ArweaveWalletKitNgService {
     } catch (e) {
       this.emitError('Could Not Disconnect', EVENT_CODES.DISCONNECT, e);
     }
-    localStorage.removeItem('strategy');
     this.strategy = undefined;
   }
 
@@ -165,6 +171,7 @@ export class ArweaveWalletKitNgService {
    * @returns - returns null if error
    */
   public async resume(): Promise<void | null> {
+    this.emit('Try Resume', EVENT_CODES.TRY_RESUME);
     if (!this.strategy || !this.strategy.resumeSession) {
       this.emitError('Cannot Resume', EVENT_CODES.RESUME_ERROR);
       return null;
@@ -184,6 +191,7 @@ export class ArweaveWalletKitNgService {
    * @returns address of wallet or null
    */
   public async getActiveAddress(): Promise<string | null> {
+    this.emit('Try Active Address', EVENT_CODES.TRY_ACTIVE_ADDRESS);
     if (!this.strategy) {
       return null;
     }
@@ -206,6 +214,7 @@ export class ArweaveWalletKitNgService {
    * @returns - returns the all active addresses of the wallet or null
    */
   public async getAllAddresses(): Promise<string[] | null> {
+    this.emit('Try All Active Addresses', EVENT_CODES.TRY_ALL_ACTIVE_ADDRESSES);
     if (!this.strategy || !this.strategy.getAllAddresses) {
       return null;
     }
@@ -237,6 +246,7 @@ export class ArweaveWalletKitNgService {
     transaction: Transaction,
     options?: SignatureOptions
   ): Promise<Transaction | SignTransactionArweaveReturnProps | null> {
+    this.emit('Try Sign', EVENT_CODES.TRY_SIGN);
     if (!this.strategy) {
       return transaction;
     }
@@ -255,6 +265,7 @@ export class ArweaveWalletKitNgService {
    * @returns - returns permissions of the connected wallet or null
    */
   public async getPermissions(): Promise<PermissionType[] | null> {
+    this.emit('Try Permissions', EVENT_CODES.TRY_PERMISSIONS);
     if (!this.strategy) {
       return null;
     }
@@ -277,6 +288,7 @@ export class ArweaveWalletKitNgService {
    * @returns - returns the wallet names of the connected wallet or null
    */
   public async getWalletNames(): Promise<{ [addr: string]: string } | null> {
+    this.emit('Try Wallet Names', EVENT_CODES.TRY_WALLET_NAMES);
     if (!this.strategy || !this.strategy.getWalletNames) {
       return null;
     }
@@ -304,6 +316,7 @@ export class ArweaveWalletKitNgService {
     data: BufferSource,
     algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams
   ): Promise<Uint8Array | null> {
+    this.emit('Try Encrypt', EVENT_CODES.TRY_ENCRYPT);
     if (!this.strategy || !this.strategy.encrypt) {
       return null;
     }
@@ -327,6 +340,7 @@ export class ArweaveWalletKitNgService {
     data: BufferSource,
     algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams
   ): Promise<Uint8Array | null> {
+    this.emit('Try Decrypt', EVENT_CODES.TRY_DECRYPT);
     if (!this.strategy || !this.strategy.decrypt) {
       return null;
     }
@@ -345,6 +359,7 @@ export class ArweaveWalletKitNgService {
    * @returns - returns the arweave config or null
    */
   public async getArweaveConfig(): Promise<GatewayConfig | null> {
+    this.emit('Try Arweave Config', EVENT_CODES.TRY_ARWEAVE_CONFIG);
     if (!this.strategy || !this.strategy.getArweaveConfig) {
       return null;
     }
@@ -372,6 +387,7 @@ export class ArweaveWalletKitNgService {
     data: Uint8Array,
     algorithm: AlgorithmIdentifier | RsaPssParams | EcdsaParams
   ): Promise<Uint8Array | null> {
+    this.emit('Try Signature', EVENT_CODES.TRY_SIGNATURE);
     if (!this.strategy || !this.strategy.signature) {
       return null;
     }
@@ -390,6 +406,7 @@ export class ArweaveWalletKitNgService {
    * @returns - returns the public key or null
    */
   public async getActivePublicKey(): Promise<string | null> {
+    this.emit('Try Active Public Key', EVENT_CODES.TRY_ACTIVE_PUBLIC_KEY);
     if (!this.strategy || !this.strategy.getActivePublicKey) {
       return null;
     }
@@ -414,6 +431,7 @@ export class ArweaveWalletKitNgService {
    * @returns - returns the token or null
    */
   public async addToken(id: string): Promise<void | null> {
+    this.emit('Try Add Token', EVENT_CODES.TRY_ADD_TOKEN);
     if (!this.strategy || !this.strategy.addToken) {
       return null;
     }
@@ -435,6 +453,7 @@ export class ArweaveWalletKitNgService {
   public async dispatch(
     transaction: Transaction
   ): Promise<DispatchResult | null> {
+    this.emit('Try Dispatch', EVENT_CODES.TRY_DISPATCH);
     if (!this.strategy || !this.strategy.dispatch) {
       return null;
     }
@@ -481,6 +500,7 @@ export class ArweaveWalletKitNgService {
   }
 
   public async getBalance(address: string): Promise<number | null> {
+    this.emit('Try Balance', EVENT_CODES.TRY_BALANCE);
     if (!this.arweave) {
       return null;
     }
