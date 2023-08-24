@@ -181,6 +181,23 @@ this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(async (event) =>
   MODAL = 1001,
   CAN_RESUME = 1002,
 
+  TRY_CONNECT = 1010,
+  TRY_DISCONNECT = 1011,
+  TRY_ACTIVE_ADDRESS = 1012,
+  TRY_ALL_ACTIVE_ADDRESSES = 1013,
+  TRY_SIGN = 1014,
+  TRY_PERMISSIONS = 1015,
+  TRY_WALLET_NAMES = 1016,
+  TRY_ENCRYPT = 1017,
+  TRY_DECRYPT = 1018,
+  TRY_ARWEAVE_CONFIG = 1019,
+  TRY_SIGNATURE = 1020,
+  TRY_ACTIVE_PUBLIC_KEY = 1021,
+  TRY_ADD_TOKEN = 1022,
+  TRY_DISPATCH = 1023,
+  TRY_RESUME = 1024,
+  TRY_BALANCE = 1025,
+
   CONNECT = 3000,
   DISCONNECT = 3001,
   ACTIVE_ADDRESS = 3002,
@@ -195,24 +212,26 @@ this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(async (event) =>
   ACTIVE_PUBLIC_KEY = 3011,
   ADD_TOKEN = 3012,
   DISPATCH = 3013,
-  RESUME = 30014,
+  RESUME = 3014,
+  BALANCE = 3015,
 
   ERROR = 5000,
-  RESUME_ERROR = 5001,
-  CONNECT_ERROR = 5002,
-  DISCONNECT_ERROR = 5003,
-  ACTIVE_ADDRESS_ERROR = 5004,
-  ALL_ACTIVE_ADDRESSES_ERROR = 5005,
-  SIGN_ERROR = 5006,
-  PERMISSIONS_ERROR = 5007,
-  WALLET_NAMES_ERROR = 5008,
-  ENCRYPT_ERROR = 5009,
-  DECRYPT_ERROR = 5010,
-  ARWEAVE_CONFIG_ERROR = 5011,
-  SIGNATURE_ERROR = 5012,
-  ACTIVE_PUBLIC_KEY_ERROR = 5013,
-  ADD_TOKEN_ERROR = 5014,
-  DISPATCH_ERROR = 5015,
+  CONNECT_ERROR = 5001,
+  DISCONNECT_ERROR = 5002,
+  ACTIVE_ADDRESS_ERROR = 5003,
+  ALL_ACTIVE_ADDRESSES_ERROR = 5004,
+  SIGN_ERROR = 5005,
+  PERMISSIONS_ERROR = 5006,
+  WALLET_NAMES_ERROR = 5007,
+  ENCRYPT_ERROR = 5008,
+  DECRYPT_ERROR = 5009,
+  ARWEAVE_CONFIG_ERROR = 5010,
+  SIGNATURE_ERROR = 5011,
+  ACTIVE_PUBLIC_KEY_ERROR = 5012,
+  ADD_TOKEN_ERROR = 5013,
+  DISPATCH_ERROR = 5014,
+  RESUME_ERROR = 5015,
+  BALANCE_ERROR = 5016,
 ```
 
 ## Custom Styling
@@ -221,25 +240,40 @@ If you don't want to use the default styling you can copy the styles.scss from /
 
 ## Change Log
 
-- `2023-08-21` - Updated connection-button component.
-- `2023-08-21` - Updated connection-modal component.
-- `2023-08-21` - Added Profile Modal and Profile Button.
-- `2023-08-21` - Refactored ArweaveWebWallet.ts and Added specify disconnect functionality.
-- `2023-08-21` - Add balance function to retrieve balance using arweavejs.
-- `2023-08-21` - Removed component relative scss files.
-- `2023-08-21` - Refactored styles into /styles directory that build into styles.scss.
-- `2023-08-17` - Created github workflow to publish package to npm.
-- `2023-08-17` - Modified directory structure for new components.
-- `2023-08-17` - Add Empty Templates for each of the components ( Connect-Button | Connection-Modal | Profile-Modal ).
-- `2023-08-17` - Created Connect Button Component with separate Module Load.
-- `2023-08-17` - Separated the component from the ar-kit-ng module so you can import on its owns.
-- `2023-08-17` - Modified the README.md with up to date information.
+### 2023-08-24
 
-- `2023-08-16` - Added Connection Strategies from Arweave Wallet Kit! - Thanks @ropats16!
-- `2023-08-16` - New Event System ( LISTEN FOR INCOMING EVENTS AND REACT ACCORDINGLY )
-- `2023-08-16` - Refactored CSS with BEM naming convention.
-- `2023-08-16` - Refactored HTML to maintain better document structure.
-- `2023-08-16` - Modified the README.md with up to date information.
+- Updated Service To Emit Try Events.
+- Added Try Event Types Codes.
+- Refactored SCSS To Include A Global Reset Wrapper.
+- Refactored HTML based on CSS changes
+- Listening For Try Events to Render UI.
+
+### 2023-08-21
+
+- Updated connection-button component.
+- Updated connection-modal component.
+- Added Profile Modal and Profile Button.
+- Refactored ArweaveWebWallet.ts and Added specify disconnect functionality.
+- Add balance function to retrieve balance using arweavejs.
+- Removed component relative scss files.
+- Refactored styles into /styles directory that build into styles.scss.
+
+### 2023-08-17
+
+- Created github workflow to publish package to npm.
+- Modified directory structure for new components.
+- Add Empty Templates for each of the components ( Connect-Button | Connection-Modal | Profile-Modal ).
+- Created Connect Button Component with separate Module Load.
+- Separated the component from the ar-kit-ng module so you can import on its owns.
+- Modified the README.md with up to date information.
+
+### 2023-08-16
+
+- Added Connection Strategies from Arweave Wallet Kit! - Thanks @ropats16!
+- New Event System ( LISTEN FOR INCOMING EVENTS AND REACT ACCORDINGLY )
+- Refactored CSS with BEM naming convention.
+- Refactored HTML to maintain better document structure.
+- Modified the README.md with up to date information.
 
 ## TODO
 

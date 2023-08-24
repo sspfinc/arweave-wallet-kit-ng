@@ -4,6 +4,7 @@ export enum EVENT_CODES {
   MODAL = 1001,
   CAN_RESUME = 1002,
 
+  // Try Events
   TRY_CONNECT = 1010,
   TRY_DISCONNECT = 1011,
   TRY_ACTIVE_ADDRESS = 1012,
@@ -38,6 +39,7 @@ export enum EVENT_CODES {
   DISPATCH = 3013,
   RESUME = 3014,
   BALANCE = 3015,
+
   // Error Events
   ERROR = 5000,
   CONNECT_ERROR = 5001,
@@ -55,7 +57,6 @@ export enum EVENT_CODES {
   ADD_TOKEN_ERROR = 5013,
   DISPATCH_ERROR = 5014,
   RESUME_ERROR = 5015,
-
   BALANCE_ERROR = 5016,
 }
 
