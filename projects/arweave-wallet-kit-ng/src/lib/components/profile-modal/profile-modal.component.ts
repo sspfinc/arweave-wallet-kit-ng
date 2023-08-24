@@ -39,6 +39,8 @@ const GET_PROFILE = gql`
 export class ProfileModalComponent implements AfterViewInit, OnDestroy {
   @Input('size') public size: ButtonSize = 'md';
 
+  public loading: boolean = false;
+
   public handle!: string | undefined;
   public avatar!: string | undefined;
   public balance!: number | null;
@@ -108,16 +110,14 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
                   });
               }
               break;
-            case EVENT_CODES.DISCONNECT:
-              this.handle = undefined;
-              this.avatar = undefined;
-              this.address = undefined;
-              this.display_address = undefined;
-              this.long_address = undefined;
-              this.isActive = false;
-              this.renderer.setStyle(this.el.nativeElement, 'display', 'none');
 
-              this.close();
+            case EVENT_CODES.TRY_DISCONNECT:
+              this.loading = true;
+              break;
+            case EVENT_CODES.DISCONNECT:
+              this.loading = false;
+              this.reset();
+
               break;
           }
         }
@@ -132,6 +132,18 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
     this.querySubscription.unsubscribe();
+  }
+
+  private reset(): void {
+    this.handle = undefined;
+    this.avatar = undefined;
+    this.address = undefined;
+    this.display_address = undefined;
+    this.long_address = undefined;
+    this.isActive = false;
+    this.renderer.setStyle(this.el.nativeElement, 'display', 'none');
+
+    this.close();
   }
 
   public open() {

@@ -1,6 +1,9 @@
-<div (click)="open()" *ngIf="isActive">
+<div (click)="open()" *ngIf="isActive" class="awk">
   <ng-content *ngIf="custom !== null"></ng-content>
   <ng-container *ngIf="custom === null">
-    <div [class]="'awk-btn awk-btn--primary awk-btn--' + size">{{ label }}</div>
+    <div [class]="'awk-btn awk-btn--primary awk-btn--' + size">
+      <ng-container *ngIf="!loading">{{ label }}</ng-container>
+      <ng-container *ngIf="loading">CONNECTING</ng-container>
+    </div>
   </ng-container>
 </div>

@@ -87,6 +87,7 @@ export class ConnectionModalComponent implements AfterViewInit, OnDestroy {
               await this.arweaveWalletKitNgService.getActiveAddress();
 
               break;
+
             case EVENT_CODES.READY:
             case EVENT_CODES.CONNECT:
               this.arweaveWalletKitNgService.setIsActive(false);

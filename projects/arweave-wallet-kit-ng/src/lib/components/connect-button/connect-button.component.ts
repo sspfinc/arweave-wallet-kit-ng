@@ -22,6 +22,8 @@ export class ConnectButtonComponent implements AfterViewInit {
 
   public isActive: boolean = true;
 
+  public loading: boolean = false;
+
   constructor(
     private arweaveWalletKitNgService: ArweaveWalletKitNgService,
     @Optional() @Attribute('custom') public custom: any,
@@ -29,14 +31,23 @@ export class ConnectButtonComponent implements AfterViewInit {
     private el: ElementRef
   ) {
     this.arweaveWalletKitNgService.eventEmitterObservable.subscribe((event) => {
-      if (event.code === EVENT_CODES.ACTIVE_ADDRESS) {
-        this.renderer.setStyle(this.el.nativeElement, 'display', 'none');
+      switch (event.code) {
+        case EVENT_CODES.TRY_CONNECT:
+          this.loading = true;
+          break;
+        case EVENT_CODES.CONNECT:
+          this.loading = false;
+          break;
+        case EVENT_CODES.ACTIVE_ADDRESS:
+          this.renderer.setStyle(this.el.nativeElement, 'display', 'none');
 
-        this.isActive = false;
-      } else if (event.code === EVENT_CODES.DISCONNECT) {
-        this.renderer.setStyle(this.el.nativeElement, 'display', 'block');
+          this.isActive = false;
+          break;
+        case EVENT_CODES.TRY_DISCONNECT:
+          this.renderer.setStyle(this.el.nativeElement, 'display', 'block');
 
-        this.isActive = true;
+          this.isActive = true;
+          break;
       }
     });
   }
