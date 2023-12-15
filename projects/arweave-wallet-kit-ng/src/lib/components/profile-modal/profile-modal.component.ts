@@ -107,7 +107,6 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
                     );
                     this.avatar = `https://arweave.net/${avatar}`;
                     this.handle = response.handle;
-                    console.log(response);
                   });
               }
               break;
@@ -125,7 +124,6 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
 
               break;
           }
-          console.log(event);
         }
       );
 

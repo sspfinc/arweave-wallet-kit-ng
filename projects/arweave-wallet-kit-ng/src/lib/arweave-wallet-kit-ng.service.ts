@@ -139,7 +139,6 @@ export class ArweaveWalletKitNgService {
 
       this.emit('Connected', EVENT_CODES.CONNECT);
     } catch (e) {
-      console.log(e);
       this.strategy = undefined;
       localStorage.removeItem('strategy');
 
