@@ -7,12 +7,12 @@ export default class ArweaveWebWalletStrategy
   extends BrowserWalletStrategy
   implements Strategy
 {
-  public override id: string = 'webwallet';
-  public override name: string = 'Arweave.app';
-  public override description: string = 'Web based wallet software';
-  public override theme: string = '24, 24, 24';
-  public override logo: string = 'qVms-k8Ox-eKFJN5QFvrPQvT9ryqQXaFcYbr-fJbgLY';
-  public url: string = 'https://arweave.app';
+  public override id = 'webwallet';
+  public override name = 'Arweave.app';
+  public override description = 'Web based wallet software';
+  public override theme = '24, 24, 24';
+  public override logo = 'qVms-k8Ox-eKFJN5QFvrPQvT9ryqQXaFcYbr-fJbgLY';
+  public url = 'https://arweave.app';
 
   #instance = new ArweaveWebWallet();
 

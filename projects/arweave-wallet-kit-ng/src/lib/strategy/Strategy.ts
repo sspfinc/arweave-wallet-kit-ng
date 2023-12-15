@@ -1,12 +1,12 @@
-import type { SignatureOptions } from "arweave/web/lib/crypto/crypto-interface";
-import type Transaction from "arweave/web/lib/transaction";
+import type { SignatureOptions } from 'arweave/web/lib/crypto/crypto-interface';
+import type Transaction from 'arweave/web/lib/transaction';
 import type {
   PermissionType,
   AppInfo,
   GatewayConfig,
   DispatchResult,
-} from "arconnect";
-import { SignTransactionArweaveReturnProps } from "othent";
+} from 'arconnect';
+import { SignTransactionArweaveReturnProps } from 'othent';
 
 export default abstract class Strategy {
   // info

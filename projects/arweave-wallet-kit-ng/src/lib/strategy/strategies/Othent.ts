@@ -1,7 +1,7 @@
-import type { SignatureOptions } from "arweave/web/lib/crypto/crypto-interface";
-import type { DispatchResult, GatewayConfig, PermissionType } from "arconnect";
-import type Transaction from "arweave/web/lib/transaction";
-import type { AppInfo } from "arweave-wallet-connector";
+import type { SignatureOptions } from 'arweave/web/lib/crypto/crypto-interface';
+import type { DispatchResult, GatewayConfig, PermissionType } from 'arconnect';
+import type Transaction from 'arweave/web/lib/transaction';
+import type { AppInfo } from 'arweave-wallet-connector';
 import {
   Othent,
   PingReturnProps,
@@ -26,22 +26,20 @@ import {
   verifyArweaveDataReturnProps,
   verifyBundlrDataProps,
   verifyBundlrDataReturnProps,
-} from "othent";
-import Strategy from "../Strategy";
+} from 'othent';
+import Strategy from '../Strategy';
 
 export default class OthentStrategy implements Strategy {
-  public id: string = "othent";
-  public name: string = "Google";
-  public description: string =
-    "Sign in with Google through Othent Smart Contract Wallets";
-  public theme: string = "35, 117, 239";
-  public logo: string = "33nBIUNlGK4MnWtJZQy9EzkVJaAd7WoydIKfkJoMvDs";
-  public url: string = "https://othent.io";
+  public id = 'othent';
+  public name = 'Google';
+  public description =
+    'Sign in with Google through Othent Smart Contract Wallets';
+  public theme = '35, 117, 239';
+  public logo = '33nBIUNlGK4MnWtJZQy9EzkVJaAd7WoydIKfkJoMvDs';
+  public url = 'https://othent.io';
 
-  #apiID: string = "e27671e337ce37c7bbaf7459e0df65a0";
+  #apiID = 'e27671e337ce37c7bbaf7459e0df65a0';
   #addressListeners: ListenerFunction[] = [];
-
-  constructor() {}
 
   /**
    * Advanced function to override the default API ID
@@ -60,14 +58,14 @@ export default class OthentStrategy implements Strategy {
     });
 
     if (!othent) {
-      throw new Error("[Arweave Wallet Kit] Invalid Othent API ID");
+      throw new Error('[Arweave Wallet Kit] Invalid Othent API ID');
     }
 
     if (ensureConnection) {
       const permissions = await this.getPermissions();
 
       if (permissions.length === 0) {
-        throw new Error("[Arweave Wallet Kit] You are not connected to Othent");
+        throw new Error('[Arweave Wallet Kit] You are not connected to Othent');
       }
     }
 
@@ -125,15 +123,15 @@ export default class OthentStrategy implements Strategy {
       }
 
       return [
-        "ACCESS_ADDRESS",
-        "ACCESS_PUBLIC_KEY",
-        "ACCESS_ALL_ADDRESSES",
-        "SIGN_TRANSACTION",
-        "ENCRYPT",
-        "DECRYPT",
-        "SIGNATURE",
-        "ACCESS_ARWEAVE_CONFIG",
-        "DISPATCH",
+        'ACCESS_ADDRESS',
+        'ACCESS_PUBLIC_KEY',
+        'ACCESS_ALL_ADDRESSES',
+        'SIGN_TRANSACTION',
+        'ENCRYPT',
+        'DECRYPT',
+        'SIGNATURE',
+        'ACCESS_ARWEAVE_CONFIG',
+        'DISPATCH',
       ] as PermissionType[];
     } catch {
       return [];
@@ -162,19 +160,19 @@ export default class OthentStrategy implements Strategy {
   ): Promise<SignTransactionArweaveReturnProps> {
     if (options) {
       console.warn(
-        "[Arweave Wallet Kit] Othent does not support transaction signature options"
+        '[Arweave Wallet Kit] Othent does not support transaction signature options'
       );
     }
 
-    if (transaction.quantity !== "0" && transaction.target !== "") {
+    if (transaction.quantity !== '0' && transaction.target !== '') {
       throw new Error(
-        "[Arweave Wallet Kit] Signing with Othent only supports data type transactions"
+        '[Arweave Wallet Kit] Signing with Othent only supports data type transactions'
       );
     }
     const othent = await this.#othentInstance(false);
 
     const signedTransaction = await othent.signTransactionArweave({
-      othentFunction: "uploadData",
+      othentFunction: 'uploadData',
       data: transaction.data,
       tags: transaction.tags ? transaction.tags : [],
     });
@@ -243,7 +241,7 @@ export default class OthentStrategy implements Strategy {
       const othent = await this.#othentInstance(false);
 
       const signedTransaction = await othent.signTransactionBundlr({
-        othentFunction: "uploadData",
+        othentFunction: 'uploadData',
         data: transaction.data,
         tags: transaction.tags ? transaction.tags : [],
       });
@@ -251,13 +249,13 @@ export default class OthentStrategy implements Strategy {
       const res = await othent.sendTransactionBundlr(signedTransaction);
 
       if (res.success === true) {
-        return { id: res.transactionId, type: "BUNDLED" };
+        return { id: res.transactionId, type: 'BUNDLED' };
       } else {
         try {
           const othent = await this.#othentInstance(false);
 
           const signedTransaction = await othent.signTransactionArweave({
-            othentFunction: "uploadData",
+            othentFunction: 'uploadData',
             data: transaction.data,
             tags: transaction.tags ? transaction.tags : [],
           });
@@ -265,7 +263,7 @@ export default class OthentStrategy implements Strategy {
           const res = await othent.sendTransactionArweave(signedTransaction);
 
           if (res.success === true) {
-            return { id: res.transactionId, type: "BASE" };
+            return { id: res.transactionId, type: 'BASE' };
           } else {
             throw new Error(
               `Failed to dispatch layer transaction. Please recheck request.`

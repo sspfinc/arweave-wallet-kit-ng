@@ -18,6 +18,7 @@ import OthentStrategy from '../../strategy/strategies/Othent';
 import { EVENT_CODES } from '../../types';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'awk-connection-modal',
   templateUrl: './connection-modal.component.html',
 })
@@ -76,7 +77,7 @@ export class ConnectionModalComponent implements AfterViewInit, OnDestroy {
     // Listen For Events and Handle Them Accordingly
     this.eventSubscription =
       this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(
-        async (event) => {
+        async event => {
           switch (event.code) {
             case EVENT_CODES.RESUME:
               this.renderer.removeClass(

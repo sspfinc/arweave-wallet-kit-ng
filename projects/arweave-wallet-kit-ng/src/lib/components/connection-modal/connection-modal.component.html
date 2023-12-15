@@ -11,15 +11,13 @@
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="1.5"
-              d="M17.25 6.75L6.75 17.25"
-            ></path>
+              d="M17.25 6.75L6.75 17.25"></path>
             <path
               stroke="currentColor"
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="1.5"
-              d="M6.75 6.75L17.25 17.25"
-            ></path>
+              d="M6.75 6.75L17.25 17.25"></path>
           </svg>
         </button>
       </section>
@@ -30,12 +28,11 @@
             <button
               class="awk-modal__strategy__logo"
               [style]="'background-color: rgb(' + strategy.theme + ')'"
-              (click)="connect(strategy)"
-            >
+              (click)="connect(strategy)">
               <img
                 [src]="'https://arweave.net/' + strategy.logo"
                 draggable="false"
-              />
+                alt="Logo" />
             </button>
             <div class="awk-modal__strategy__content">
               <div class="awk-fs--2 awk-fw--bold">
@@ -47,8 +44,7 @@
             </div>
             <button
               class="awk-btn awk-btn--secondary awk-btn--xs"
-              (click)="connect(strategy)"
-            >
+              (click)="connect(strategy)">
               GO
             </button>
           </div>
@@ -85,8 +81,7 @@
         </button>
         <button
           class="awk-btn awk-btn--secondary awk-btn--sm"
-          (click)="disconnect()"
-        >
+          (click)="disconnect()">
           Cancel
         </button>
       </div>

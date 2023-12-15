@@ -1,2 +1,2 @@
-export * from "./connect-button.component";
-export * from "./connect-button.module";
+export * from './connect-button.component';
+export * from './connect-button.module';

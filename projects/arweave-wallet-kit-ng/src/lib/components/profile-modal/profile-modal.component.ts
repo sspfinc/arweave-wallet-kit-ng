@@ -1,26 +1,25 @@
+import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
   ElementRef,
+  Input,
   OnDestroy,
-  OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { ArweaveWalletKitNgService } from '../../arweave-wallet-kit-ng.service';
+import { Apollo, gql } from 'apollo-angular';
 import { Subscription, firstValueFrom } from 'rxjs';
+import { ArweaveWalletKitNgService } from '../../arweave-wallet-kit-ng.service';
 import { EVENT_CODES } from '../../types';
 import { formatAddress } from '../../utils';
-import { Apollo, ApolloBase, gql } from 'apollo-angular';
-import { HttpClient } from '@angular/common/http';
-import { Input } from '@angular/core';
 import { ButtonSize } from '../connect-button';
 
 const GET_PROFILE = gql`
   query Transactions($owners: [String!]) {
     transactions(
       tags: [{ name: "Protocol-Name", values: ["Account-0.2", "Account-0.3"] }]
-      first: 10
+      first: 1
       owners: $owners
     ) {
       edges {
@@ -33,13 +32,14 @@ const GET_PROFILE = gql`
 `;
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'awk-profile-modal',
   templateUrl: './profile-modal.component.html',
 })
 export class ProfileModalComponent implements AfterViewInit, OnDestroy {
-  @Input('size') public size: ButtonSize = 'md';
+  @Input() public size: ButtonSize = 'md';
 
-  public loading: boolean = false;
+  public loading = true;
 
   public handle!: string | undefined;
   public avatar!: string | undefined;
@@ -48,7 +48,7 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
   public display_address: string | undefined;
   public long_address: string | undefined;
 
-  public isActive: boolean = false;
+  public isActive = false;
 
   private querySubscription!: Subscription;
 
@@ -76,14 +76,13 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
     // Listen For Events and Handle Them Accordingly
     this.eventSubscription =
       this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(
-        async (event) => {
+        async event => {
           switch (event.code) {
             case EVENT_CODES.ACTIVE_ADDRESS:
+              this.loading = false;
               this.address = event.data;
               this.display_address = formatAddress(event.data, 4);
               this.long_address = formatAddress(event.data, 8);
-              this.isActive = true;
-              this.renderer.setStyle(this.el.nativeElement, 'display', 'block');
 
               if (this.address) {
                 this.balance = await this.arweaveWalletKitNgService.getBalance(
@@ -102,24 +101,31 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
                     const response = (await firstValueFrom(
                       this.http.get(`https://arweave.net/${node.id}`)
                     )) as any;
-                    this.avatar = `https://arweave.net/${
-                      response.avatar.split('ar://')[1]
-                    }`;
+                    const avatar = (response.avatar as string).replace(
+                      'ar://',
+                      ''
+                    );
+                    this.avatar = `https://arweave.net/${avatar}`;
                     this.handle = response.handle;
                     console.log(response);
                   });
               }
               break;
-
-            case EVENT_CODES.TRY_DISCONNECT:
+            case EVENT_CODES.TRY_ACTIVE_ADDRESS:
+            case EVENT_CODES.TRY_CONNECT:
+              this.isActive = true;
+              this.renderer.setStyle(this.el.nativeElement, 'display', 'block');
               this.loading = true;
               break;
+            case EVENT_CODES.TRY_DISCONNECT:
             case EVENT_CODES.DISCONNECT:
+            case EVENT_CODES.CONNECT_ERROR:
               this.loading = false;
               this.reset();
 
               break;
           }
+          console.log(event);
         }
       );
 
@@ -131,7 +137,9 @@ export class ProfileModalComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
-    this.querySubscription.unsubscribe();
+    if (this.querySubscription) {
+      this.querySubscription.unsubscribe();
+    }
   }
 
   private reset(): void {

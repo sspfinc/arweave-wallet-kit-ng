@@ -30,8 +30,20 @@
             "tsConfig": "projects/arweave-wallet-kit-ng/tsconfig.spec.json",
             "polyfills": ["zone.js", "zone.js/testing"]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/arweave-wallet-kit-ng/**/*.ts",
+              "projects/arweave-wallet-kit-ng/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

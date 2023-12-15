@@ -13,16 +13,17 @@ import { EVENT_CODES } from '../../types';
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'awk-connect-button',
   templateUrl: './connect-button.component.html',
 })
-export class ConnectButtonComponent implements AfterViewInit {
-  @Input('label') public label: string = 'Connect Wallet';
-  @Input('size') public size: ButtonSize = 'md';
+export class ConnectButtonComponent {
+  @Input() public label = 'Connect Wallet';
+  @Input() public size: ButtonSize = 'md';
 
-  public isActive: boolean = true;
+  public isActive = true;
 
-  public loading: boolean = false;
+  public loading = false;
 
   constructor(
     private arweaveWalletKitNgService: ArweaveWalletKitNgService,
@@ -30,28 +31,28 @@ export class ConnectButtonComponent implements AfterViewInit {
     private renderer: Renderer2,
     private el: ElementRef
   ) {
-    this.arweaveWalletKitNgService.eventEmitterObservable.subscribe((event) => {
+    this.arweaveWalletKitNgService.eventEmitterObservable.subscribe(event => {
       switch (event.code) {
         case EVENT_CODES.TRY_CONNECT:
-          this.loading = true;
-          break;
-        case EVENT_CODES.CONNECT:
-          this.loading = false;
-          break;
+        case EVENT_CODES.TRY_ACTIVE_ADDRESS:
         case EVENT_CODES.ACTIVE_ADDRESS:
           this.renderer.setStyle(this.el.nativeElement, 'display', 'none');
 
           this.isActive = false;
           break;
+
         case EVENT_CODES.TRY_DISCONNECT:
           this.renderer.setStyle(this.el.nativeElement, 'display', 'block');
 
           this.isActive = true;
+          this.loading = true;
+          break;
+        case EVENT_CODES.DISCONNECT:
+          this.loading = false;
           break;
       }
     });
   }
-  ngAfterViewInit(): void {}
   /**
    * Open Modal For Connecting To Wallet
    * @returns void

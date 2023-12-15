@@ -20,7 +20,7 @@ import Arweave from 'arweave/node';
 @Injectable()
 export class ArweaveWalletKitNgService {
   private arweave!: Arweave;
-  private isActive: boolean = false;
+  private isActive = false;
 
   private strategies!: Strategy[];
   public strategy!: Strategy | undefined;
@@ -61,7 +61,7 @@ export class ArweaveWalletKitNgService {
     appInfo: AppInfo,
     strategies: Strategy[],
     permissions: PermissionType[],
-    local: boolean = false
+    local = false
   ) {
     if (!appInfo || !appInfo.name) {
       throw new Error('Init(): AppInfo.name is required');
@@ -96,7 +96,7 @@ export class ArweaveWalletKitNgService {
     this.strategyType = localStorage.getItem('strategy') || undefined;
 
     this.strategy = this.strategies.find(
-      (strategy) => strategy.id === this.strategyType
+      strategy => strategy.id === this.strategyType
     );
     if (this.strategy && this.strategy.resumeSession) {
       this.emit('Can Resume', EVENT_CODES.CAN_RESUME);
