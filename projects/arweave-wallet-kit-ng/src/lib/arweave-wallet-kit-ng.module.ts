@@ -5,12 +5,9 @@ import {
   SkipSelf,
 } from '@angular/core';
 import { ArweaveWalletKitNgService } from './arweave-wallet-kit-ng.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-@NgModule({
-  imports: [HttpClientModule],
-  providers: [ArweaveWalletKitNgService],
-})
+@NgModule({ imports: [], providers: [ArweaveWalletKitNgService, provideHttpClient(withInterceptorsFromDi())] })
 export class ArweaveWalletKitNgModule {
   /**
    * ArweaveWalletKitNgModule Constructor For Preventing Multiple Imports
