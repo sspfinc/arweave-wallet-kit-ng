@@ -15,7 +15,7 @@ import { EVENT_CODES } from '../../types';
 import { formatAddress } from '../../utils';
 import { ButtonSize } from '../connect-button';
 
-const GET_PROFILE = gql`
+const   GET_PROFILE = gql`
   query Transactions($owners: [String!]) {
     transactions(
       tags: [{ name: "Protocol-Name", values: ["Account-0.2", "Account-0.3"] }]
@@ -30,12 +30,12 @@ const GET_PROFILE = gql`
     }
   }
 `;
-
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector 
   selector: 'awk-profile-modal',
-  templateUrl: './profile-modal.component.html',
+  templateUrl: './profile-modal.component.html'
 })
+
 export class ProfileModalComponent implements AfterViewInit, OnDestroy {
   @Input() public size: ButtonSize = 'md';
 
